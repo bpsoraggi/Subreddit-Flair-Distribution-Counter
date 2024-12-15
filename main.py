@@ -46,19 +46,24 @@ while True:
 subreddit = r.subreddit(config['reddit']['subreddit'])
 
 flairs = {}
+flair_list = [flair for flair in subreddit.flair()]
+# print(f"all unique flairs: {set([flair['flair_text'] for flair in flair_list])}")
 
-logging.debug('Counting flairs...')
-for flair in subreddit.flair(limit=None):
-    flairName = flair['flair_css_class']
+for flair in flair_list:
+    flairName = flair['flair_text']
     if flairName not in flairs:
         flairs[flairName] = 0
         logging.debug('Flair added: {0}'.format(flairName))
+        print('Flair added: {0}'.format(flairName))
 
     flairs[flairName] += 1
     logging.debug('Flair counted: {0}'.format(flairName))
+    #print('Flair counted: {0}'.format(flairName))
+
 
 logging.info('Sorting flairs...')
 sorted_flairs = sorted(flairs.items(), key=lambda x: x[1], reverse=True)
+print(f"sorted_flairs: {sorted_flairs}")
 logging.info('Writing flairs...')
 
 with io.open(config['output']['filename'], 'w+', encoding='utf-8') as f:
