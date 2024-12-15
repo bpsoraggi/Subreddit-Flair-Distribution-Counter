@@ -6,6 +6,7 @@ REQUIREMENTS
 2. [Praw 4.x (or newer)](https://praw.readthedocs.io/en/latest/)
 3. Reddit account with Moderator privileges for a subreddit
 4. Client ID and Secret to supply with the script
+5. For this specific script, it is necessary to have 2FA turned *off*
 
 REQUISITOS
 ------------
@@ -16,6 +17,7 @@ REQUISITOS
 2. [Praw 4.x (ou mais recente)](https://praw.readthedocs.io/en/latest/)
 3. Conta no Reddit com privilégios de Moderador para um subreddit
 4. ID do Cliente e Segredo para fornecer com o script
+5. Para esse script, é necessário que a autenticação de 2 fatores esteja *desligada*
 
 ---
 
