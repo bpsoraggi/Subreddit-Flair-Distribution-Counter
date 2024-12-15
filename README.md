@@ -1,4 +1,4 @@
-Updated version of the script originally written by [@ericwoolard](https://github.com/ericwoolard)
+Updated version of the script [script](https://github.com/ericwoolard/Subreddit-Flair-Distribution-Counter) originally written by [@ericwoolard](https://github.com/ericwoolard)
 
 REQUIREMENTS
 ------------
@@ -7,6 +7,18 @@ REQUIREMENTS
 3. Reddit account with Moderator privileges for a subreddit
 4. Client ID and Secret to supply with the script
 
+REQUISITOS
+------------
+1. [Python 3](https://www.python.org/downloads/)
+
+   Para verificar qual versão do Python está sendo usada ao rodar `python` no CMD, execute `python -V`. Da mesma forma, você pode verificar se o Python 3 está instalado corretamente e usando a versão correta com `python3 -V`. Se você tiver apenas uma versão do Python instalada, isso não se aplica a você.
+
+2. [Praw 4.x (ou mais recente)](https://praw.readthedocs.io/en/latest/)
+3. Conta no Reddit com privilégios de Moderador para um subreddit
+4. ID do Cliente e Segredo para fornecer com o script
+
+---
+
 How to use
 ----------
 1. Place the script and cfg file in a new folder by itself.
@@ -14,44 +26,18 @@ How to use
 3. Start the script *from within the folder you saved it to* by entering `python main.py` in CMD. 
 **Note** - From your command prompt, you will need to `cd` (Change Directory command) into the directory where the script is saved. See the tip below if you don't know how to do this.
 
-**TIP** - As a shortcut on Windows, you can open the folder containing the script and SHIFT + Right Click in the empty space,
-then choose "Open command window here" if you don't want to have to CD to the correct directory, or if you're unsure how. 
-Then, complete step #3.
-
-INFO
+Como usar
 ----------
-First and foremost, in order for this to work you *must* provide credentials that are tied to a Reddit account which has 
-moderator access to the subreddit you run the script against. If you are unsure how to generate a Client-ID and Secret, 
-login to the Reddit account to be authenticated with the script and go to Preferences>apps. Create a 'Personal Use Script'
-and fill out the needed info. Since you will be registering a personal-use script, there won't be a need for a redirect-URI,
-but Reddit still requires that you provide something here, so just 'http://localhost/reddit-oauth' will suffice. 
+1. Coloque o script e o arquivo cfg em uma nova pasta isolada.
+2. Edite as linhas 3-7 do arquivo cfg com seu Client-ID, Client Secret, senha, nome de usuário e nome do subreddit, respectivamente (**NÃO** coloque essas credenciais entre aspas como uma string típica).
+3. Execute o script *dentro da pasta onde você o salvou* digitando `python main.py` no CMD.  
+**Nota** - A partir do seu prompt de comando, você precisará usar o comando `cd` (mudar de diretório) para a pasta onde o script está salvo. Veja a dica abaixo se não souber como fazer isso.
 
-Due to the nature of the Reddit API, this script may take a bit to complete depending on the size of the subreddit,
-because it has to manually loop through each user that has selected a flair. At the time of writing this (Feb 6, 2017), the included
-`flaircount.json` example was ran against r/GlobalOffensive and took roughly 7-8 minutes to complete, with a total of 97,354 users having
-a flair selected out of a total subscriber count of 464,511. Don't be alarmed if you don't see anything progress right away.
+**Erro HTTP 401 (não autorizado)** -  
+  * Isso geralmente significa que há um problema com o Client-ID fornecido. Quando você vai em preferências>apps e clica em 'editar' 
+  sob o aplicativo que você criou, seu Client-ID estará [aqui](https://i.imgur.com/n3dKYcF.png)
 
-You can receive more verbose output by changing line 22 of the cfg file from "INFO" to "DEBUG".
+**OAuthException: erro ``unauthorized_client`` ao processar a solicitação (Somente aplicativos de script podem usar autenticação por senha)** -  
+  * Se você ver esse erro, é provável que não tenha criado o aplicativo corretamente em preferências > apps. Ao configurar isso,
+  existem 3 opções para escolher: web app, installed app, script. Você *precisa* registrar o aplicativo como um **aplicativo de script** para que isso funcione. [Exemplo](https://i.imgur.com/ZV30NVg.png)
 
-Once the script completes, it will dump all of the stats to both a JSON file and a CSV file in the same folder as the script itself, and
-will name them `flaircount.json` and `flaircount.csv` respectively. You can configure either filename from lines 10 & 11 of the cfg file.
-
-Common Errors
----------------
-If you have both Python 2 and 3 installed on your system and receive errors when starting the script with `python main.py`, 
-run the script with `python3 main.py` instead. If you have to do it this way, you'll also need to make sure you installed
-PRAW for Python 3 instead of 2. You can check which version it's tied to with `pip show praw`. If it was installed for 
-Python 2, install it for Python 3 with `pip3 install praw`.
-
-To check which version of Python is being used when running `python` in CMD, run `python -V`. Similarly, you can verify
-that Python 3 is installed correctly and using the correct version with `python3 -V`. If you only have one version of Python
-installed, this won't apply to you. 
-
-**HTTP 401 error (unauthorized)** - 
-  * This typically means there's an issue with the Client-ID you supplied. When you go to preferences>apps and click 'edit' 
-  under the application you created, your Client-ID will be [here](https://i.imgur.com/n3dKYcF.png)
-
-**OAuthException: unauthorized_client error processing request (Only script apps may use password auth)** - 
-  * If you see this error, it's likely you didn't create the application correctly under preferences>apps. When setting this up,
-  there are 3 options to choose from: web app, installed app, script. You *must* register the app as a **script app** for this 
-  to work. [Example](https://i.imgur.com/ZV30NVg.png)
